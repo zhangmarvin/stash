@@ -1,4 +1,3 @@
 venv
 *.pyc
-stash/settings.py
 iceberg.db
