@@ -1,27 +1,27 @@
 from django.db import models
 
-# Create your models here.
+# Create your models.Models here.
+
+class Content(models.Model):
+    title = models.CharField(max_length=30)
+    link = models.TextField()
+    description = models.TextField()
+    date_posted = models.DateTimeField()
 
 class User(models.Model):
-    name = Model.CharField(max_length=30)
-    salt = Model.CharField(max_length=5)
-    password = Model.CharField(max_length=50)
+    name = models.CharField(max_length=30)
+    salt = models.CharField(max_length=5)
+    password = models.CharField(max_length=50)
     
-class Stash(models.Model):
-    name = Models.CharField(max_length=30)
-    content = models.ManyToManyField(Content)
-    owner = models.ForeignKey(User)
-    takes_from = ManyToManyField(Heap)
-
 class Heap(models.Model):
-    name = Models.CharField(max_length=30)
+    name = models.CharField(max_length=30)
     content = models.ManyToManyField(Content)
     curators = models.ManyToManyField(User, related_name = 'curators')
     readers = models.ManyToManyField(User, related_name = 'readers')
     visible = models.BooleanField()
 
-class Content(models.Model):
-    title = Models.CharField(max_length=30)
-    link = Models.TextField()
-    description = Models.TextField()
-    date_posted = Models.DateTimeField()
+class Stash(models.Model):
+    name = models.CharField(max_length=30)
+    content = models.ManyToManyField(Content)
+    owner = models.ForeignKey(User)
+    takes_from = models.ManyToManyField(Heap)
