@@ -45,7 +45,10 @@ def login(request):
 @csrf_exempt
 def register(request):
     _name = request.POST['username']
+    if len(_name) == 0:
+        return HttpResponse(json.dumps({"success": 0, "reason": "username required"}))
     matches = User.objects.filter(name=_name)
+
     if len(matches) > 0:
         return HttpResponse(json.dumps({"success": 0, "reason": "already registered"}))
     
