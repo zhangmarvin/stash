@@ -9,7 +9,7 @@
 <div class="row-fluid">
   <div class="piles span6">
     <p><span class="lead">My Stashes</span>    
-      <span class="pull-right"><button class="btn btn-inverse" id="create-stash" type="submit" onClick="javascript:$('#createHeapForm').modal('show')"><i class="icon-plus icon-white"></i></button></span></p>
+      <span class="pull-right"><button class="btn btn-inverse" id="create-stash" type="submit" onClick="javascript:$('#createStashForm').modal('show')"><i class="icon-plus icon-white"></i></button></span></p>
     <hr>
     {% for stash in stashes %}
     <p>{{ stash.name }}</p>
@@ -25,7 +25,7 @@
 
   <div class="piles span6">
     <p><span class="lead">My Heaps</span>    
-      <span class="pull-right"><button class="btn btn-inverse" id="create-heap" type="submit" onClick="javascript:createHeap()"><i class="icon-plus icon-white"></i></button></span></p>
+      <span class="pull-right"><button class="btn btn-inverse" id="create-heap" type="submit" onClick="javascript:$('#createHeapForm').modal('show')"><i class="icon-plus icon-white"></i></button></span></p>
     <hr>
     {% for heap in heaps_write %}
     <p>{{ heap.name }}</p>
@@ -56,14 +56,14 @@
 
 <div id="createStashForm" class="modal hide fade">
   <div class="modal-header">
-    <span class="pull-right"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</but<span>ton>
+    <span class="pull-right"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></span>
     <h2 id="createStashHeader" class="inlineCenter">Create a Stash</h2>
   </div>
   <div id="createStashBody" class="modal-body">
     <form class="form-inline" method="post" action="javascript:dummy()">
 
       <input type="text" class="input-small" autocomplete="off" name="stashName" placeholder="untitled stash" autofocus  id="stashName"><br>
-      <span class="pull-right"><button class="btn" id="createStash" type="submit" onClick="javascript:$('#createStashForm').modal('show')"><i class="icon-plus icon-white"></i></button></span>
+      <span class="pull-right"><button class="btn" id="createStash" type="submit" onClick="javascript:createStash()"><i class="icon-plus icon-white"></i></button></span>
     </form>
   </div>
   <div class="modal-footer">
@@ -73,15 +73,15 @@
 
 <div id="createHeapForm" class="modal hide fade">
   <div class="modal-header">
-    <span class="pull-right"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</but<span>ton>
+    <span class="pull-right"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></span>
     <h2 id="createHeapHeader" class="inlineCenter">Create a Heap</h2>
   </div>
   <div id="createHeapBody" class="modal-body">
     <form class="form-inline" method="post" action="javascript:dummy()">
-      <input type="text" class="input-small" autocomplete="off" name="heapName" placeholder="untitled heap" autofocus  id="heapName"><br>
+      <input type="text" class="input-small" autocomplete="off" name="heapName" placeholder="untitled heap" autofocus id="heapName"><br>
       <input type="checkbox" name="heapVisibility" value="true" id="heapVisibility"><br>
       <label for="heapVisibility">Allow this heap to be searchable?</label>
-      <span class="pull-right"><button class="btn" id="createHeap" type="submit" onClick="javascript:createHeap()"><i class="icon-plus icon-white"></i></but<span>ton>
+      <span class="pull-right"><button class="btn" id="createHeap" type="submit" onClick="javascript:createHeap()"><i class="icon-plus icon-white"></i></button></span>
     </form>
   </div>
   <div class="modal-footer">

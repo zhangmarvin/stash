@@ -125,7 +125,7 @@ function create_stash(stash_name, success_cb, error_cb) {
    */
 function create_heap(stash_name, visible, success_cb, error_cb) {
     $.ajax( {
-        url: 'ajax/make_heap',
+        url: '../ajax/make_heap',
     type: 'GET',
     data: {'name': stash_name}, 
     success: _make_success_wrapper(success_cb),
