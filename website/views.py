@@ -33,3 +33,6 @@ def stash(request, user_id, stash_id):
             'content': stash.content
            }
     return render_to_response('stash.html', RequestContext(request, data))
+
+def ajax(request, data='default'):
+    return HttpResponse('nothing, except for ' + data)
