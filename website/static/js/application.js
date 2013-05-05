@@ -101,6 +101,25 @@ function create_stash(stash_name, success_cb, error_cb) {
     });
 }    
 
+/* If there's an error, it calls error_cb with one of
+   { 'type': <non-HTTP error> }
+   { 'type': 'http', 'reason': <server return message> }
+
+   Otherwise, it calls success_cb with one of the following:
+   { 'success': true },
+   { 'success': false, 'reason': 'not logged in' }
+   { 'success': false, 'reason': '<hash_name> already exists' }
+*/
+function create_stash(stash_name, visible, success_cb, error_cb) {
+    $.ajax( {
+	url: 'ajax/make_stash',
+	type: 'GET',
+	data: {'owner': owner, 'name': stash_name}, 
+	success: _make_success_wrapper(success_cb),
+	failure: _make_error_wrapper(error_cb)
+    });
+}    
+
 /* For "stashing" a link away... 
    
    If there's an error submitting a link, it calls error_cb with one of

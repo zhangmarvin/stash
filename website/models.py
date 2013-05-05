@@ -22,5 +22,5 @@ class Heap(models.Model):
 class Stash(models.Model):
     name = models.CharField(max_length=30)
     content = models.ManyToManyField(Content)
-    owner = models.ForeignKey(User)
+    owner = models.ForeignKey(User, related_name = 'stashes')
     takes_from = models.ManyToManyField(Heap)

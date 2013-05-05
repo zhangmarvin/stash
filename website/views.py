@@ -35,8 +35,8 @@ def login(request):
     if str(digested) == hashed:
         request.session['id'] = matches[0].id
         request.session['username'] = _name
-        request.session['writeHeaps'] = matches[0].curators_set.all()
-        request.session['readHeaps'] = matches[0].readers_set.all()
+        request.session['writeHeaps'] = matches[0].curators.all() 
+        request.session['readHeaps'] = matches[0].readers.all()
         request.session['stashes'] = matches[0].stash_set.all()
         return HttpResponse(json.dumps({"success": 1}))
     else:
@@ -73,11 +73,11 @@ def register(request):
     u = User(name=_name, salt=_salt, password=unicode(digested))
     u.save()
     
-    request.session['id'] = matches[0].id
+    request.session['id'] = u.id
     request.session['username'] = _name
-    request.session['writeHeaps'] = matches[0].curators_set.all()
-    request.session['readHeaps'] = matches[0].readers_set.all()
-    request.session['stashes'] = matches[0].stash_set.all()
+    request.session['writeHeaps'] = []
+    request.session['readHeaps'] = []
+    request.session['stashes'] = []
     
     return HttpResponse(json.dumps({"success": 1}))
 
