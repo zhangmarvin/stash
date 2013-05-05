@@ -101,7 +101,7 @@ function submitLogout() {
    { 'type': 'http', 'reason': <server return message> }
 
    Otherwise, it calls success_cb with one of the following:
-   { 'success': true },
+   { 'success': true, 'id': <id> },
    { 'success': false, 'reason': 'not logged in' }
    { 'success': false, 'reason': 'this name has been taken' }
    */
@@ -120,7 +120,7 @@ function create_stash(stash_name, success_cb, error_cb) {
    { 'type': 'http', 'reason': <server return message> }
 
    Otherwise, it calls success_cb with one of the following:
-   { 'success': true },
+   { 'success': true, 'id': <id> },
    { 'success': false, 'reason': 'not logged in' }
    */
 function create_heap(stash_name, visible, success_cb, error_cb) {
@@ -133,7 +133,7 @@ function create_heap(stash_name, visible, success_cb, error_cb) {
     });
 }    
 
-/* For "stashing" a link away... 
+/* For "stashing" a link away. type should either be "stash" or "heap"
 
    If there's an error submitting a link, it calls error_cb with one of
    { 'type': <non-HTTP error> }
@@ -145,33 +145,11 @@ function create_heap(stash_name, visible, success_cb, error_cb) {
    { 'success': false, 'reason': 'no write access' }
    { 'success': false, 'reason': 'stash does not exist' }
 */
-function stash_link(type, stash_id, title, link_url, success_cb, error_cb) {
+function stash_link(s_type, stash_id, title, link_url, success_cb, error_cb) {
     $.ajax( {
         url: 'ajax/stash_link',
         type: 'GET',
-        data: {'type': type, 'stash': stash_id, 'title': title, 'url': link_url},
-        success: _make_success_wrapper(success_cb),
-        error: _make_error_wrapper(error_cb)
-    });
-}
-
-/* For "throwing a link onto a heap"... 
-
-   If there's an error submitting a link, it calls error_cb with one of
-   { 'type': <non-HTTP error> }
-   { 'type': 'http', 'reason': <server return message> }
-
-   Otherwise, it calls success_cb with one of the following:
-   { 'success': true },
-   { 'success': false, 'reason': 'not logged in' },
-   { 'success': false, 'reason': 'no write access' }
-   { 'success': false, 'reason': 'heap does not exist' }
-*/
-function throw_link(heap_id, title, link_url, success_cb, error_cb) {
-    $.ajax( {
-        url: 'ajax/throw_link',
-        type: 'GET',
-        data: {'heap': heap_id, 'title': title, 'url': link_url},
+        data: {'type': s_type, 'stash': stash_id, 'title': title, 'url': link_url},
         success: _make_success_wrapper(success_cb),
         error: _make_error_wrapper(error_cb)
     });
