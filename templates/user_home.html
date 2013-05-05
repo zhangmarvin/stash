@@ -2,8 +2,6 @@
 {% block title %}User: {{ name }}{% endblock %}
 {% block user %}{{ name }}{% endblock %}
 
-{% block head %}{% endblock %}
-
 {% block content %}
 
 <div class="row-fluid">
@@ -63,7 +61,7 @@
     <form class="form-inline" method="post" action="javascript:dummy()">
 
       <input type="text" class="input-small" autocomplete="off" name="stashName" placeholder="untitled stash" autofocus  id="stashName"><br>
-      <span class="pull-right"><button class="btn" id="createNewStash" type="submit" onClick="javascript:createStash(); $('#createStashForm').modal('hide')"><i class="icon-plus icon-white"></i></button></span>
+      <span class="pull-right"><button class="btn btn-inverse" id="createNewStash" type="submit" onClick="javascript:createStash(); $('#createStashForm').modal('hide')"><i class="icon-plus icon-white"></i></button></span>
     </form>
   </div>
   <div class="modal-footer">
@@ -81,7 +79,7 @@
       <input type="text" class="input-small" autocomplete="off" name="heapName" placeholder="untitled heap" autofocus id="heapName"><br>
       <input type="checkbox" name="heapVisibility" value="true" id="heapVisibility"><br>
       <label for="heapVisibility">Allow this heap to be searchable?</label>
-      <span class="pull-right"><button class="btn" id="createNewHeap" type="submit" onClick="javascript:createHeap(); $('#createHeapForm').modal('hide')"><i class="icon-plus icon-white"></i></button></span>
+      <span class="pull-right"><button class="btn btn-inverse" id="createNewHeap" type="submit" onClick="javascript:createHeap(); $('#createHeapForm').modal('hide')"><i class="icon-plus icon-white"></i></button></span>
     </form>
   </div>
   <div class="modal-footer">

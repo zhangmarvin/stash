@@ -128,6 +128,11 @@ def stash_link(request):
     except AttributeError:
         return HttpResponse(json.dumps({"success": 0, "reason": "not logged in"}))
     
+    _type = request.GET["type"]
+    _s_id = request.GET["stash"]
+    _title = request.GET["title"]
+    _url = request.GET["url"]
+
     if _type == "stash":
         targets = Stash.objects.filter(id=_s_id)
     else:
@@ -135,18 +140,15 @@ def stash_link(request):
     if len(targets) == 0:
         return HttpResponse(json.dumps({"success": 0, "reason": "stash does not exist"}))
     target = targets[0]
+    _owner_obj = User.objects.filter(id=_owner)[0]
     if _type == "stash":
-        writeable = (target.owner == _owner)
+        writeable = (target.owner == _owner_obj)
     else:
-        writeable = (owner in target.curators)
+        writeable = (_owner_obj in target.curators) # use id?
     if not writeable:
         return HttpResponse(json.dumps({"success": 0, "reason": "no write access"}))
         
-    _type = request.GET["type"]
-    _s_id = request.GET["stash"]
-    _title = request.GET["title"]
-    _url = request.GET["url"]
-    c = Content(title=_title, link=_url, poster=_owner)
+    c = Content(title=_title, link=_url, poster=_owner_obj)
     c.save()
     target.content.add(c)
     target.save()

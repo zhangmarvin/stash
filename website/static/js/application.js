@@ -146,8 +146,10 @@ function create_heap(stash_name, visible, success_cb, error_cb) {
    { 'success': false, 'reason': 'stash does not exist' }
 */
 function stash_link(s_type, stash_id, title, link_url, success_cb, error_cb) {
+    console.log( link_url );
+
     $.ajax( {
-        url: 'ajax/stash_link',
+        url: '../../ajax/stash_link',
         type: 'GET',
         data: {'type': s_type, 'stash': stash_id, 'title': title, 'url': link_url},
         success: _make_success_wrapper(success_cb),
@@ -195,7 +197,7 @@ function createPost() {
     var type = data[1];
     var title = document.getElementById("postName").value;
     var link = document.getElementById("postURL").value;
-    stash_link(type, title, link, creationSuccess, function(data) { updateMessage("Sorry, something went wrong. Try again!"); });
+    stash_link(type, data[2], title, link, creationSuccess, function(data) { updateMessage("Sorry, something went wrong. Try again!"); });
 }
 
 function creationSuccess(data) {
