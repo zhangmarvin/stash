@@ -12,6 +12,7 @@ function updateMessage(msg) {
 }
 
 function loginSuccess(data) {
+    console.log(data)
     if (data.success) {
         console.log("Logged in successfully!");
         window.location.href = '/user/';
@@ -35,6 +36,7 @@ function submitLogin() {
 }
 
 function signupSuccess(data) {
+    console.log(data);
     if (data.success) {
         console.log("Registered successfully!");
         window.location.href = '/user/';
