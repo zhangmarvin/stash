@@ -58,7 +58,7 @@ def register(request):
 
     raw = randrange(2 ** 512)
     _salt = ''
-    for i in range(512/8):
+    for i in range(64):
         _salt += chr(((raw >> (8*i)) & 0xFF) % 128)
     _salt = unicode(_salt)
         
@@ -102,6 +102,7 @@ def user_home(request, user_id=None):
     except User.DoesNotExist:
         raise Http404
     data = {'id': user_id,
+            'name': user.name,
             'stashes': user.stashes.all(),
             'heaps_write': user.curators.all(),
             'heaps_read': user.readers.all(),
