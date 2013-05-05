@@ -6,37 +6,40 @@
 {% block content %}
 
 <div class="row-fluid">
-  <div class="well span6">
+  <div class="piles span6">
     <p><span class="lead">My Stashes</span>    
       <span class="pull-right"><button class="btn btn-inverse" id="create-stash" type="submit" onClick="javascript:createStash()"><i class="icon-plus icon-white"></i></button></span></p>
+    <hr>
     {% for stash in stashes %}
     <p>{{ stash.name }}</p>
     <p>
       {% for i in range %}
       {{ stash.contents.all.i.title }}<br>
-      {{ stash.contents.all.i.link }}
+      <a href="{{ stash.contents.all.i.link }}">{{ stash.contents.all.i.link }}</a>
       <span class="muted">{{ stash.contents.all.i.date_posted }}</span>
       {% endfor %}
     </p>
     {% endfor %}
   </div>
 
-  <div class="well span6">
+  <div class="piles span6">
     <p><span class="lead">My Heaps</span>    
       <span class="pull-right"><button class="btn btn-inverse" id="create-heap" type="submit" onClick="javascript:createHeap()"><i class="icon-plus icon-white"></i></button></span></p>
+    <hr>
     {% for heap in heaps_write %}
     <p>{{ heap.name }}</p>
     <p>
       {% for i in range %}
       {{ stash.contents.all.i.title }}<br>
-      {{ stash.contents.all.i.link }}
+      <a href="{{ stash.contents.all.i.link }}">{{ stash.contents.all.i.link }}</a>
       <span class="muted">{{ stash.contents.all.i.date_posted }}</span>
       {% endfor %}
     </p>
     {% endfor %}
   </div>
 </div>
-<div class="well">
+<hr>
+<div class="piles">
     <p><span class="lead">My Subscriptions</span></p>
     {% for heap in heaps_read %}
     <p>{{ heap.name }}</p>

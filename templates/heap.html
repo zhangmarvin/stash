@@ -1,15 +1,10 @@
 {% extends "base.html" %}
 {% block title %}{{ name }}{% endblock %}
 
-{% block head %}
-{% load staticfiles %}
-<script src="{% static "js/stash.js" %}"></script>
-{% endblock %}
-
 {% block content %}
-<div class="span12">
+<div style="overflow: hidden; text-overflow: ellipsis;">
     {{ name }}<br>
-    <p>Curators: {% for user in curators %} {{ user.name }} {% endfor %}</p>
+    <p>Curated by: {% for user in curators %} {{ user.name }} {% endfor %}</p>
     <p>Readers: {% for user in readers %} {{ user.name }} {% endfor %}</p>
 </div>
 
