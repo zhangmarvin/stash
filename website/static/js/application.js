@@ -127,7 +127,7 @@ function create_heap(stash_name, visible, success_cb, error_cb) {
     $.ajax( {
         url: '../ajax/make_heap',
     type: 'GET',
-    data: {'name': stash_name}, 
+    data: {'name': stash_name, 'visible': visible}, 
     success: _make_success_wrapper(success_cb),
     failure: _make_error_wrapper(error_cb)
     });
@@ -181,8 +181,6 @@ function stash_take_toggle(stash_id, heap_id, link_url, success_cb, error_cb) {
 
 function createStash() {
     var name = document.getElementById("stashName").value;
-    console.log(document.getElementById("stashName"));
-    console.log(name);
     create_stash(name, creationSuccess, function(data) { updateMessage("Sorry, something went wrong. Try again!"); });
 }
 
