@@ -46,13 +46,16 @@ def register(request):
     _salt = ''
     for i in range(512/8):
         _salt += chr(((raw >> (8*i)) & 0xFF) % 128)
+    _salt = unicode(_salt)
         
     hasher = sha512()
     hasher.update(pw)
     hasher.update(_salt)
-    _salt = _salt.encode(encoding='UTF-8', errors='strict')
+    digest = hasher.digest()
+    for i in range(len(digest)):
+        digest[i] = chr(ord(digest[i]) % 128)
 
-    u = User(name=_name, salt=_salt, password=hasher.digest())
+    u = User(name=_name, salt=_salt, password=unicode(digest))
     u.save()
     
     return HttpResponse(str({'success': 'true'}))
