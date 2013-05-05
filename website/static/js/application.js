@@ -21,7 +21,8 @@ function _make_success_wrapper(success_cb) {
 	success_cb(data);
     }
     return success_wrap;
-}    
+}
+/* End helpers */
 
 
 /* If there's an error doing the login POST, it calls error_cb with one of
@@ -55,7 +56,7 @@ function login(username, password, success_cb, error_cb) {
 */
 function register(username, password, success_cb, error_cb) {
     $.ajax( {
-	url: 'ajax/login',
+	url: 'ajax/register',
 	type: 'POST',
 	data: {'name': username, 'password': password},
 	success: _make_success_wrapper(success_cb),
