@@ -23,4 +23,27 @@
 <div class="span6 preview">
   <iframe id="previewing"></iframe>
 </div>
+
+<div id="createPostForm" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h2 id="createPostHeader" class="inlineCenter">Add a Post</h2>
+  </div>
+  <div id="createPostBody" class="modal-body">
+    <form class="form-inline" method="post" action="javascript:dummy()">
+      <input type="text" class="input-small" autocomplete="off" name="postName" placeholder="untitled post" autofocus  id="postName"><br>
+      <input type="text" class="input-small" autocomplete="off" name="postURL" placeholder="url" id="postURL"><br>
+      <button class="btn" id="createPost" type="submit" onClick="javascript:createPost()"><i class="icon-plus icon-white"></i></button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block endbody %}
+<script>
+  $('#createPostForm').modal('hide');
+</script>
 {% endblock %}
