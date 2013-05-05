@@ -23,6 +23,7 @@ function _make_success_wrapper(success_cb) {
 }
 /* End helpers */
 
+function dummy() {}
 
 /* If there's an error doing the login POST, it calls error_cb with one of
    { 'type': <non-HTTP error> }
