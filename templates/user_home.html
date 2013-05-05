@@ -5,38 +5,39 @@
 
 {% block content %}
 
-<div class="span12 well">
+<div class="row-fluid">
+  <div class="well span6">
     <p><span class="lead">My Stashes</span>    
-    <button class="btn" id="create-stash" type="submit" onClick="javascript:createStash()">Create a New Stash</button></p>
+      <span class="pull-right"><button class="btn btn-inverse" id="create-stash" type="submit" onClick="javascript:createStash()"><i class="icon-plus icon-white"></i></button></span></p>
     {% for stash in stashes %}
     <p>{{ stash.name }}</p>
     <p>
-        {% for i in range %}
-        {{ stash.contents.all.i.title }}<br>
-        {{ stash.contents.all.i.link }}
-        <span class="muted">{{ stash.contents.all.i.date_posted }}</span>
-        {% endfor %}
+      {% for i in range %}
+      {{ stash.contents.all.i.title }}<br>
+      {{ stash.contents.all.i.link }}
+      <span class="muted">{{ stash.contents.all.i.date_posted }}</span>
+      {% endfor %}
     </p>
     {% endfor %}
-</div>
+  </div>
 
-<div class="span12 well">
+  <div class="well span6">
     <p><span class="lead">My Heaps</span>    
-    <button class="btn" id="create-heap" type="submit" onClick="javascript:createHeap()">Create a New Heap</button></p>
+      <span class="pull-right"><button class="btn btn-inverse" id="create-heap" type="submit" onClick="javascript:createHeap()"><i class="icon-plus icon-white"></i></button></span></p>
     {% for heap in heaps_write %}
     <p>{{ heap.name }}</p>
     <p>
-        {% for i in range %}
-        {{ stash.contents.all.i.title }}<br>
-        {{ stash.contents.all.i.link }}
-        <span class="muted">{{ stash.contents.all.i.date_posted }}</span>
-        {% endfor %}
+      {% for i in range %}
+      {{ stash.contents.all.i.title }}<br>
+      {{ stash.contents.all.i.link }}
+      <span class="muted">{{ stash.contents.all.i.date_posted }}</span>
+      {% endfor %}
     </p>
     {% endfor %}
+  </div>
 </div>
-
-<div class="span12 well">
-    <p><span class="lead">Read-Only Heaps</span></p>
+<div class="well">
+    <p><span class="lead">My Subscriptions</span></p>
     {% for heap in heaps_read %}
     <p>{{ heap.name }}</p>
     <p>
@@ -51,13 +52,13 @@
 
 <div id="createStashForm" class="modal hide fade">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <span class="pull-right"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</but<span>ton>
     <h2 id="createStashHeader" class="inlineCenter">Create a Stash</h2>
   </div>
   <div id="createStashBody" class="modal-body">
     <form class="form-inline" method="post" action="javascript:dummy()">
       <input type="text" class="input-small" autocomplete="off" name="stashName" placeholder="untitled stash" autofocus  id="stashName"><br>
-      <button class="btn" id="createStash" type="submit" onClick="javascript:createStash()"><i class="icon-plus icon-white"></i></button>
+      <span class="pull-right"><button class="btn" id="createStash" type="submit" onClick="javascript:createStash()"><i class="icon-plus icon-white"></i></but<span>ton>
     </form>
   </div>
   <div class="modal-footer">
@@ -67,7 +68,7 @@
 
 <div id="createHeapForm" class="modal hide fade">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <span class="pull-right"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</but<span>ton>
     <h2 id="createHeapHeader" class="inlineCenter">Create a Heap</h2>
   </div>
   <div id="createHeapBody" class="modal-body">
@@ -75,7 +76,7 @@
       <input type="text" class="input-small" autocomplete="off" name="heapName" placeholder="untitled heap" autofocus  id="heapName"><br>
       <input type="checkbox" name="heapVisibility" value="true" id="heapVisibility"><br>
       <label for="heapVisibility">Allow this heap to be searchable?</label>
-      <button class="btn" id="createHeap" type="submit" onClick="javascript:createHeap()"><i class="icon-plus icon-white"></i></button>
+      <span class="pull-right"><button class="btn" id="createHeap" type="submit" onClick="javascript:createHeap()"><i class="icon-plus icon-white"></i></but<span>ton>
     </form>
   </div>
   <div class="modal-footer">

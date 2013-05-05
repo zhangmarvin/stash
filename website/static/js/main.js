@@ -43,17 +43,17 @@ function signupSuccess(data) {
     } else {
         console.log("Error: " + data.reason);
         switch (data.reason) {
-        case "already registered":
-            updateMessage("This username has already been taken.");
-            break;
-        case "username required":
-            updateMessage("You need a username to sign up.");
-            break;
-        case "password required":
-            updateMessage("You need a password to sign up.");
-            break;
-        default:
-            updateMessage("Error: " + data.reason);
+            case "already registered":
+                updateMessage("This username has already been taken.");
+                break;
+            case "username required":
+                updateMessage("You need a username to sign up.");
+                break;
+            case "password required":
+                updateMessage("You need a password to sign up.");
+                break;
+            default:
+                updateMessage("Error: " + data.reason);
         }
     }
 }
@@ -61,5 +61,5 @@ function signupSuccess(data) {
 function submitSignup() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-    register(username, password, signupSuccess, function(data) { updateMessage( "Sorry, something went wrong. Try again!"); });
+    register(username, password, signupSuccess, function(data) { updateMessage("Sorry, something went wrong. Try again!"); });
 }
