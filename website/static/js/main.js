@@ -46,6 +46,9 @@ function signupSuccess(data) {
         case "already registered":
             updateMessage("This username has already been taken.");
             break;
+        case "username required":
+            updateMessage("You need a username to sign up.");
+            break;
         case "password required":
             updateMessage("You need a password to sign up.");
             break;
