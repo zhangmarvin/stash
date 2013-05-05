@@ -34,5 +34,26 @@ def stash(request, user_id, stash_id):
            }
     return render_to_response('stash.html', RequestContext(request, data))
 
+def heap(request, user_id, heap_id):
+    try:
+        user = User.objects.get(pk=user_id)
+        all_users = User.objects.get(pk=0)
+        heap = Heap.objects.get(pk=user_id)
+    except User.DoesNotExist, Heap.DoesNotExist:
+        raise Http404
+    curators_list = heap.curators.all()
+    if user not in curators_list and all_users not in curators_list:
+        raise PermissionDenied
+    readers_list = heap.readers.all()
+    if user not in readers_list and all_users not in readers_list:
+        raise PermissionDenied
+    data = {'id': heap_id,
+            'name': heap.name,
+            'curators': curators_list,
+            'readers': readers_list,
+            'content': heap.content
+           }
+    return render_to_response('heap.html', RequestContext(request, data))
+
 def ajax(request, data='default'):
     return HttpResponse('nothing, except for ' + data)
