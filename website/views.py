@@ -93,13 +93,25 @@ def make_stash(request):
     for stash in user.stashes.all():
         if _name == stash.name:
             return HttpResponse(json.dumps({"success": 0, "reason": "this name has been taken"}))
-    new_stash = Stash(name = _name, content = [], owner = user, takes_from = [])
+    new_stash = Stash(name = _name, owner = user)
     new_stash.save()
 
     return HttpResponse(json.dumps({"success": 1}))
 
 def make_heap(request):
-    pass
+    try:
+        _owner = request.session["id"]
+    except AttributeError:
+        return HttpResponse(json.dumps({"success": 0, "reason": "not logged in"}))
+    _name = request.GET["name"]
+    user = User.objects.get(pk=_owner)
+    new_heap = Heap(name = _name, visible = request.GET["visible"])
+    new_heap.save()
+    new_heap.curators.add(user)
+    new_heap.readers.add(user)
+    new_heap.save()
+
+    return HttpResponse(json.dumps({"success": 1}))
 
 ### END AJAX ###
 
