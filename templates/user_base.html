@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block nav %}
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav">
+      <li><a class="brand" href="/user/">{% block user %}{% endblock %}'s Stash</a></li>
+    </ul>
+    <button type="submit" class="btn pull-right" style="font-size:20px" onClick="javascript:submitLogout()">&times;</button>
+</div>
+</div>
+{% endblock %}

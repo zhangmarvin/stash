@@ -31,3 +31,7 @@ hr {
     border-top-color: #eee;
     border-bottom-color: #fff;
 }
+
+.navbar {
+    margin-bottom:0;
+}
