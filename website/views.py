@@ -25,6 +25,7 @@ def login(request):
     checker = sha512()
     checker.update(pw)
     checker.update(salt)
+    digest = checker.digest()
     
     digested = ""
     for char in digest:
