@@ -150,3 +150,48 @@ function stash_take_toggle(stash_id, heap_id, link_url, success_cb, error_cb) {
     });
 }
 
+function createStash() {
+    var name = document.getElementById("stashName").value;
+    create_stash(name, creationSuccess, function(data) { updateMessage("Sorry, something went wrong. Try again!"); });
+}
+
+function createHeap() {
+    var name = document.getElementById("heapName").value;
+    var visibility = document.getElementById("heapVisibility").checked;
+    create_heap(name, visibility, creationSuccess, function(data) { updateMessage("Sorry, something went wrong. Try again!"); });
+}
+
+function createPost() {
+    var data = window.location.pathname.split("/");
+    var type = data[1];
+    var ID = data[2];
+    var title = document.getElementById("postName").value;
+    var link = document.getElementById("postURL").value;
+    stash_link(ID, title, link, creationSuccess, function(data) { updateMessage("Sorry, something went wrong. Try again!"); });
+}
+
+function creationSuccess(data) {
+    data = $.parseJSON(data);
+    if (data.success == 1) {
+        console.log("Created successfully!");
+        window.location.href = '#';
+    } else {
+        console.log("Error: " + data.reason);
+        switch (data.reason) {
+            case "not logged in":
+                updateMessage("You are not currently logged in.");
+                break;
+            case "this name has been taken":
+                updateMessage("Please pick another name.");
+                break;
+            case "no write access":
+                updateMessage("You cannot write here.");
+                break;
+            case "stash does not exist":
+                updateMessage("You're writing somewhere that doesn't exist.");
+                break;
+            default:
+                updateMessage("Error: " + data.reason);
+        }
+    }
+}
