@@ -76,7 +76,7 @@ function register(username, password, success_cb, error_cb) {
 */
 function logout(success_cb, error_cb) {
     $.ajax( {
-        url: 'ajax/logout',
+        url: '../ajax/logout',
         type: 'GET',
         success: _make_success_wrapper(success_cb),
         failure: _make_error_wrapper(error_cb)
