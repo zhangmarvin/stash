@@ -9,6 +9,7 @@ from django.shortcuts import render, render_to_response
 from django.views.decorators.csrf import csrf_exempt
 
 from website.models import *
+import simplejson as json
 
 ### AJAX ###
 
@@ -17,7 +18,7 @@ def login(request):
     _name = request.POST['username']
     matches = User.objects.filter(name=_name)
     if len(matches) != 1:
-        return HttpResponse(str({'success': 0, 'reason': 'no account'}))
+        return HttpResponse(json.dumps({"success": 0, "reason": "no account"}))
     
     pw = request.POST['password']
     salt = matches[0].salt
@@ -32,20 +33,20 @@ def login(request):
         digested += chr(ord(char) % 128)
     
     if str(digested) == hashed:
-        return HttpResponse(str({'success': 1}))
+        return HttpResponse(json.dumps({"success": 1}))
     else:
-        return HttpResponse(str({'success': 0, 'reason': 'bad password'}))
+        return HttpResponse(json.dumps({"success": 0, "reason": "bad password"}))
     
 @csrf_exempt
 def register(request):
     _name = request.POST['username']
     matches = User.objects.filter(name=_name)
     if len(matches) > 0:
-        return HttpResponse(str({'success': 0, 'reason': 'already registered'}))
+        return HttpResponse(json.dumps({"success": 0, "reason": "already registered"}))
     
     pw = request.POST['password']
     if len(pw) == 0:
-        return HttpResponse(str({'success': 0, 'reason': 'password required'}))
+        return HttpResponse(json.dumps({"success": 0, "reason": "password required"}))
 
     raw = randrange(2 ** 512)
     _salt = ''
@@ -64,7 +65,7 @@ def register(request):
     u = User(name=_name, salt=_salt, password=unicode(digested))
     u.save()
     
-    return HttpResponse(str({'success': 1}))
+    return HttpResponse(json.dumps({"success": 1}))
 
 def make_stash(request):
     pass

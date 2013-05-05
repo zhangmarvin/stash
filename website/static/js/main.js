@@ -12,8 +12,8 @@ function updateMessage(msg) {
 }
 
 function loginSuccess(data) {
-    console.log(data)
-    if (data.success) {
+    data = $.parseJSON(data);
+    if (data.success == 1) {
         console.log("Logged in successfully!");
         window.location.href = '/user/';
     } else {
@@ -36,8 +36,8 @@ function submitLogin() {
 }
 
 function signupSuccess(data) {
-    console.log(data);
-    if (data.success) {
+    data = $.parseJSON(data);
+    if (data.success == 1) {
         console.log("Registered successfully!");
         window.location.href = '/user/';
     } else {
