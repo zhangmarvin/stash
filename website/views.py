@@ -50,6 +50,7 @@ def register(request):
     hasher = sha512()
     hasher.update(pw)
     hasher.update(_salt)
+    _salt = _salt.encode(encoding='UTF-8', errors='strict')
 
     u = User(name=_name, salt=_salt, password=hasher.digest())
     u.save()
