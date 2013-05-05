@@ -5,7 +5,6 @@ from django.db import models
 class Content(models.Model):
     title = models.CharField(max_length=30)
     link = models.TextField()
-    description = models.TextField()
     date_posted = models.DateTimeField()
 
 class User(models.Model):
