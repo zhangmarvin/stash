@@ -43,13 +43,13 @@ def register(request):
         return HttpResponse(str({'success': 'false', 'reason': 'password required'}))
 
     raw = randrange(2 ** 512)
-    salt = ''
+    _salt = ''
     for i in range(512/8):
-        salt += chr((raw >> (8*i)) & 0xFF)
+        _salt += chr((raw >> (8*i)) & 0xFF)
         
     hasher = sha512()
     hasher.update(pw)
-    hasher.update(salt)
+    hasher.update(_salt)
 
     u = User(name=_name, salt=_salt, password=hasher.digest())
     u.save()
