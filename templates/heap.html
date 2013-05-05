@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{owner}}: {{ name }}{% endblock %}
+{% block title %}{{ name }}{% endblock %}
 
 {% block head %}
 {% load staticfiles %}
@@ -8,7 +8,9 @@
 
 {% block content %}
 <div class="span12">
-  {{ name }}
+    {{ name }}<br>
+    <p>Curators: {% for user in curators %} {{ user.name }} {% endfor %}</p>
+    <p>Readers: {% for user in readers %} {{ user.name }} {% endfor %}</p>
 </div>
 
 <div class="span6 links">

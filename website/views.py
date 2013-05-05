@@ -6,11 +6,16 @@ from django.http import HttpResponse, Http404
 from django.core.exceptions import PermissionDenied
 from django.template import RequestContext
 from django.shortcuts import render, render_to_response
+from django.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_exempt
 
 from website.models import *
 
+@csrf_exempt
 def home(request):
-    return render_to_response('index.html', request)
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('index.html', c)
 
 def login(request):
     name = request.POST['username']
@@ -29,7 +34,7 @@ def login(request):
         return HttpResponse(str({'success': 'true'}))
     else:
         return HttpResponse(str({'success': 'false', 'reason': 'bad password'}))
-
+    
 def register(request):
     _name = request.POST['username']
     matches = User.objects.filter(username=_name)
