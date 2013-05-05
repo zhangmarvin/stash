@@ -6,7 +6,8 @@
 {% block content %}
 
 <div class="span12 well">
-    <p><span class="lead">My Stashes</span><button class="btn" id="create-stash" type="submit" onClick="javascript:createStash()">Create a New Stash</button></p>
+    <p><span class="lead">My Stashes</span>    
+    <button class="btn" id="create-stash" type="submit" onClick="javascript:createStash()">Create a New Stash</button></p>
     {% for stash in stashes %}
     <p>{{ stash.name }}</p>
     <p>
@@ -20,7 +21,8 @@
 </div>
 
 <div class="span12 well">
-    <p><span class="lead">My Heaps</span><button class="btn" id="create-heap" type="submit" onClick="javascript:createHeap()">Create a New Heap</button></p>
+    <p><span class="lead">My Heaps</span>    
+    <button class="btn" id="create-heap" type="submit" onClick="javascript:createHeap()">Create a New Heap</button></p>
     {% for heap in heaps_write %}
     <p>{{ heap.name }}</p>
     <p>
