@@ -108,6 +108,39 @@ def make_stash(request):
 def make_heap(request):
     pass
 
+def stash_link(request):
+    try:
+        _owner = request.session["id"]
+    except AttributeError:
+        return HttpResponse(json.dumps({"success": 0, "reason": "not logged in"}))
+    
+    if _type == "stash":
+        targets = Stash.objects.filter(id=_s_id)
+    else:
+        targets = Heap.objects.filter(id=_s_id)
+    if len(targets) == 0:
+        return HttpResponse(json.dumps({"success": 0, "reason": "stash does not exist"}))
+    target = targets[0]
+    if _type == "stash":
+        writeable = (target.owner == _owner)
+    else:
+        writeable = (owner in target.curators)
+    if not writeable:
+        return HttpResponse(json.dumps({"success": 0, "reason": "no write access"}))
+        
+    _type = request.GET["type"]
+    _s_id = request.GET["stash"]
+    _title = request.GET["title"]
+    _url = request.GET["url"]
+    c = Content(title=_title, link=_url, poster=_owner)
+    c.save()
+    target.content.add(c)
+    target.save()
+    
+    return HttpResponse(json.dumps({"success": 1}))
+
+    
+
 ### END AJAX ###
 
 
