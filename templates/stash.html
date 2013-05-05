@@ -1,5 +1,10 @@
 {% extends "base.html" %}
-{% block title %}{{ name }}{% endblock %}
+{% block title %}{{owner}}: {{ name }}{% endblock %}
+
+{% block head %}
+{% load staticfiles %}
+<script src="{% static "js/stash.js" %}"></script>
+{% endblock %}
 
 {% block content %}
 <div class="span12">
@@ -7,10 +12,10 @@
 </div>
 
 <div class="span6 links">
-  { % for link in content % }
-  <div class="link" onClick="preview({{ link.link }})">
-    <p><span class="lead"><a href="{{ link.link }}">{{ link.title }}</a></span>
-      <span class="muted">{{ link.date_posted }}</span></p>
+  {% for entry in content %}
+  <div class="link" onClick="preview({{ entry.link }})">
+      <p><span class="lead"><a href="{{ entry.link }}">{{ entry.title }}</a></span><br>
+      {{ entry.link }} <span class="muted">{{ entry.date_posted }}</span></p>
   </div>
   {% endfor %}
 </div>
