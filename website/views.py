@@ -26,7 +26,11 @@ def login(request):
     checker.update(pw)
     checker.update(salt)
     
-    if checker.digest() == hashed:
+    digested = ""
+    for char in digest:
+        digested += chr(ord(char) % 128)
+    
+    if str(digested) == hashed:
         return HttpResponse(str({'success': 'true'}))
     else:
         return HttpResponse(str({'success': 'false', 'reason': 'bad password'}))
