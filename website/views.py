@@ -103,7 +103,7 @@ def make_stash(request):
     new_stash = Stash(name = _name, owner = user)
     new_stash.save()
 
-    return HttpResponse(json.dumps({"success": 1}))
+    return HttpResponse(json.dumps({"success": 1, "id": new_stash.id}))
 
 def make_heap(request):
     try:
@@ -118,7 +118,7 @@ def make_heap(request):
     new_heap.readers.add(user)
     new_heap.save()
 
-    return HttpResponse(json.dumps({"success": 1}))
+    return HttpResponse(json.dumps({"success": 1, "id": new_heap.id}))
 
 def stash_link(request):
     try:
