@@ -1,11 +1,19 @@
-body { background: url(../img/cream_dust.png);}
+body {
+    background: url(../img/cream_dust.png);
+}
 
-#introbox { text-align: center;}
+#introbox {
+    text-align: center;
+}
 
-#introbox > h1 { font-size: 60px;}
+#introbox h1 {
+    font-size: 60px;
+    line-height: 60px;
+}
 
 #username, #password {
-    margin-bottom: 10px; outline-width: 0;
+    margin-bottom: 10px;
+    outline-width: 0;
     border-color: #ccc;
 }
 

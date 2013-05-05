@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^ajax/throw_link', 'website.views.throw_link'),
     url(r'^ajax/toggle_take', 'website.views.toggle_take'),
     url(r'^ajax/(?P<data>.*)', 'website.views.ajax'),
-                       
+
     url(r'^admin/', include(admin.site.urls))
 )
 # Examples:
