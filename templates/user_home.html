@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}User: {{ id }}{% endblock %}
+{% block head %}
+{% load staticfiles %}
+<script src="{% static "js/main.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="span12 well">
+    <p><span class="lead">My Stashes</span></p>
+    {% for stash in stashes %}
+    <p>{{ stash.name }}</p>
+    <p>
+        {% for i in range %}
+        {{ stash.contents.all.i.title }}<br>
+        {{ stash.contents.all.i.link }}
+        <span class="muted">{{ stash.contents.all.i.date_posted }}</span>
+        {% endfor %}
+    </p>
+    {% endfor %}
+</div>
+
+<div class="span12 well">
+    <p><span class="lead">My Heaps</span></p>
+    {% for heap in heaps_write %}
+    <p>{{ heap.name }}</p>
+    <p>
+        {% for i in range %}
+        {{ stash.contents.all.i.title }}<br>
+        {{ stash.contents.all.i.link }}
+        <span class="muted">{{ stash.contents.all.i.date_posted }}</span>
+        {% endfor %}
+    </p>
+    {% endfor %}
+</div>
+
+<div class="span12 well">
+    <p><span class="lead">Read-Only Heaps</span></p>
+    {% for heap in heaps_read %}
+    <p>{{ heap.name }}</p>
+    <p>
+        {% for i in range %}
+        {{ stash.contents.all.i.title }}<br>
+        {{ stash.contents.all.i.link }}
+        <span class="muted">{{ stash.contents.all.i.date_posted }}</span>
+        {% endfor %}
+    </p>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block endbody %}
+{% endblock %}
