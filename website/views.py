@@ -67,9 +67,7 @@ def make_heap(request):
 
 @csrf_exempt
 def home(request):
-    c = {}
-    c.update(csrf(request))
-    return render_to_response('index.html', c)
+    return render_to_response('index.html', request)
 
 def user_home(request, user_id):
     try:
