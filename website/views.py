@@ -33,6 +33,11 @@ def login(request):
         digested += chr(ord(char) % 128)
     
     if str(digested) == hashed:
+        request.session['id'] = matches[0].id
+        request.session['username'] = _name
+        request.session['writeHeaps'] = matches[0].curators_set.all()
+        request.session['readHeaps'] = matches[0].readers_set.all()
+        request.session['stashes'] = matches[0].stash_set.all()
         return HttpResponse(json.dumps({"success": 1}))
     else:
         return HttpResponse(json.dumps({"success": 0, "reason": "bad password"}))
@@ -64,6 +69,12 @@ def register(request):
 
     u = User(name=_name, salt=_salt, password=unicode(digested))
     u.save()
+    
+    request.session['id'] = matches[0].id
+    request.session['username'] = _name
+    request.session['writeHeaps'] = matches[0].curators_set.all()
+    request.session['readHeaps'] = matches[0].readers_set.all()
+    request.session['stashes'] = matches[0].stash_set.all()
     
     return HttpResponse(json.dumps({"success": 1}))
 
