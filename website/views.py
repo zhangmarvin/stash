@@ -7,7 +7,7 @@ from django.core.exceptions import PermissionDenied
 from django.template import RequestContext
 from django.shortcuts import render, render_to_response
 
-from stash.models import *
+from website.models import *
 
 def home(request):
     return render_to_response('index.html', request)
