@@ -4,7 +4,7 @@ function _make_error_wrapper(error_cb) {
     function error_wrap(jqxhr, status, error) {
 	if (login.arguments.length > 2) {
 	    error_cb( {
-		'type': 'http':
+		'type': 'http',
 		'error': error
 	    });
 	} else {
