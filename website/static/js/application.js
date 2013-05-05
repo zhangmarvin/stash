@@ -105,14 +105,14 @@ function submitLogout() {
    { 'success': true },
    { 'success': false, 'reason': 'not logged in' }
    { 'success': false, 'reason': 'this name has been taken' }
-*/
-function create_stash(owner, stash_name, success_cb, error_cb) {
+   */
+function create_stash(stash_name, success_cb, error_cb) {
     $.ajax( {
         url: '../ajax/make_stash',
-        type: 'GET',
-        data: {'owner': owner, 'name': stash_name}, 
-        success: _make_success_wrapper(success_cb),
-        failure: _make_error_wrapper(error_cb)
+    type: 'GET',
+    data: {'name': stash_name}, 
+    success: _make_success_wrapper(success_cb),
+    failure: _make_error_wrapper(error_cb)
     });
 }
 
@@ -123,14 +123,14 @@ function create_stash(owner, stash_name, success_cb, error_cb) {
    Otherwise, it calls success_cb with one of the following:
    { 'success': true },
    { 'success': false, 'reason': 'not logged in' }
-*/
-function create_heap(owner, stash_name, visible, success_cb, error_cb) {
+   */
+function create_heap(stash_name, visible, success_cb, error_cb) {
     $.ajax( {
         url: 'ajax/make_heap',
-        type: 'GET',
-        data: {'owner': owner, 'name': stash_name}, 
-        success: _make_success_wrapper(success_cb),
-        failure: _make_error_wrapper(error_cb)
+    type: 'GET',
+    data: {'name': stash_name}, 
+    success: _make_success_wrapper(success_cb),
+    failure: _make_error_wrapper(error_cb)
     });
 }    
 
@@ -203,27 +203,24 @@ function stash_take_toggle(stash_id, heap_id, link_url, success_cb, error_cb) {
 }
 
 function createStash() {
-    var data = window.location.pathname.split("/");
-    var ID = data[2];
     var name = document.getElementById("stashName").value;
-    create_stash(ID, name, creationSuccess, function(data) { updateMessage("Sorry, something went wrong. Try again!"); });
+    console.log(document.getElementById("stashName"));
+    console.log(name);
+    create_stash(name, creationSuccess, function(data) { updateMessage("Sorry, something went wrong. Try again!"); });
 }
 
 function createHeap() {
-    var data = window.location.pathname.split("/");
-    var ID = data[2];
     var name = document.getElementById("heapName").value;
     var visibility = document.getElementById("heapVisibility").checked;
-    create_heap(ID, name, visibility, creationSuccess, function(data) { updateMessage("Sorry, something went wrong. Try again!"); });
+    create_heap(name, visibility, creationSuccess, function(data) { updateMessage("Sorry, something went wrong. Try again!"); });
 }
 
 function createPost() {
     var data = window.location.pathname.split("/");
     var type = data[1];
-    var ID = data[2];
     var title = document.getElementById("postName").value;
     var link = document.getElementById("postURL").value;
-    stash_link(type, ID, title, link, creationSuccess, function(data) { updateMessage("Sorry, something went wrong. Try again!"); });
+    stash_link(type, title, link, creationSuccess, function(data) { updateMessage("Sorry, something went wrong. Try again!"); });
 }
 
 function creationSuccess(data) {

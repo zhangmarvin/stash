@@ -31,9 +31,9 @@
     <p>{{ heap.name }}</p>
     <p>
       {% for i in range %}
-      {{ stash.contents.all.i.title }}<br>
-      <a href="{{ stash.contents.all.i.link }}">{{ stash.contents.all.i.link }}</a>
-      <span class="muted">{{ stash.contents.all.i.date_posted }}</span>
+      {{ heap.contents.all.i.title }}<br>
+      <a href="{{ heap.contents.all.i.link }}">{{ heap.contents.all.i.link }}</a>
+      <span class="muted">{{ heap.contents.all.i.date_posted }}</span>
       {% endfor %}
     </p>
     {% endfor %}
@@ -46,9 +46,9 @@
     <p>{{ heap.name }}</p>
     <p>
         {% for i in range %}
-        {{ stash.contents.all.i.title }}<br>
-        {{ stash.contents.all.i.link }}
-        <span class="muted">{{ stash.contents.all.i.date_posted }}</span>
+        {{ heap.contents.all.i.title }}<br>
+        {{ heap.contents.all.i.link }}
+        <span class="muted">{{ heap.contents.all.i.date_posted }}</span>
         {% endfor %}
     </p>
     {% endfor %}
@@ -61,6 +61,7 @@
   </div>
   <div id="createStashBody" class="modal-body">
     <form class="form-inline" method="post" action="javascript:dummy()">
+
       <input type="text" class="input-small" autocomplete="off" name="stashName" placeholder="untitled stash" autofocus  id="stashName"><br>
       <span class="pull-right"><button class="btn" id="createStash" type="submit" onClick="javascript:$('#createStashForm').modal('show')"><i class="icon-plus icon-white"></i></button></span>
     </form>
