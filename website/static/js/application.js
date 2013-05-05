@@ -204,6 +204,7 @@ function creationSuccess(data) {
     if (data.success == 1) {
         console.log("Created successfully!");
         window.location.href = '#';
+        location.reload();
     } else {
         console.log("Error: " + data.reason);
         switch (data.reason) {

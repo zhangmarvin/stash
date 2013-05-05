@@ -119,7 +119,7 @@ def make_heap(request):
     new_heap.readers.add(user)
     new_heap.save()
 
-    return HttpResponse(json.dumps({"success": 1, "id": new_heap.id
+    return HttpResponse(json.dumps({"success": 1, "id": new_heap.id,
                                     "name": new_heap.name, "type": "heap"}))
 
 def stash_link(request):

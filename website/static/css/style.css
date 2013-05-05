@@ -24,6 +24,7 @@ body {
 .piles {
     margin-top: 1em;
     height: 300px;
+    overflow-y: auto;
 }
 
 hr {
