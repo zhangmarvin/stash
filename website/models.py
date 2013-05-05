@@ -11,7 +11,7 @@ class Content(models.Model):
     title = models.CharField(max_length=30)
     link = models.TextField()
     poster = models.ForeignKey(User, related_name = 'posts')
-    date_posted = models.DateTimeField(auto_add_now=True)
+    date_posted = models.DateTimeField(auto_now_add=True)
 
 class Heap(models.Model):
     name = models.CharField(max_length=30)
