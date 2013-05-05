@@ -89,7 +89,7 @@ function logout(username, success_cb, error_cb) {
    Otherwise, it calls success_cb with one of the following:
    { 'success': true },
    { 'success': false, 'reason': 'not logged in' }
-   { 'success': false, 'reason': '<stash_name> already exists' }
+   { 'success': false, 'reason': 'this name has been taken' }
 */
 function create_stash(stash_name, success_cb, error_cb) {
     $.ajax( {
@@ -108,11 +108,10 @@ function create_stash(stash_name, success_cb, error_cb) {
    Otherwise, it calls success_cb with one of the following:
    { 'success': true },
    { 'success': false, 'reason': 'not logged in' }
-   { 'success': false, 'reason': '<hash_name> already exists' }
 */
-function create_stash(stash_name, visible, success_cb, error_cb) {
+function create_heap(stash_name, visible, success_cb, error_cb) {
     $.ajax( {
-	url: 'ajax/make_stash',
+	url: 'ajax/make_heap',
 	type: 'GET',
 	data: {'owner': owner, 'name': stash_name}, 
 	success: _make_success_wrapper(success_cb),

@@ -35,8 +35,8 @@ def login(request):
     if str(digested) == hashed:
         request.session['id'] = matches[0].id
         request.session['username'] = _name
-        request.session['writeHeaps'] = matches[0].curators.all() 
-        request.session['readHeaps'] = matches[0].readers.all()
+        request.session['heaps_write'] = matches[0].curators.all() 
+        request.session['heaps_read'] = matches[0].readers.all()
         request.session['stashes'] = matches[0].stashes.all()
         return HttpResponse(json.dumps({"success": 1}))
     else:
@@ -75,8 +75,8 @@ def register(request):
     
     request.session['id'] = u.id
     request.session['username'] = _name
-    request.session['writeHeaps'] = []
-    request.session['readHeaps'] = []
+    request.session['heaps_write'] = []
+    request.session['heaps_read'] = []
     request.session['stashes'] = []
     
     return HttpResponse(json.dumps({"success": 1}))
@@ -94,7 +94,9 @@ def make_heap(request):
 def home(request):
     return render_to_response('index.html', request)
 
-def user_home(request, user_id):
+def user_home(request, user_id=None):
+    if user_id is None:
+        user_id = request.session['id']     
     try:
         user = User.objects.get(pk=user_id)
     except User.DoesNotExist:
