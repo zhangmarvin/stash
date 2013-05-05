@@ -203,8 +203,6 @@ function stash_take_toggle(stash_id, heap_id, link_url, success_cb, error_cb) {
 
 function createStash() {
     var name = document.getElementById("stashName").value;
-    console.log(document.getElementById("stashName"));
-    console.log(name);
     create_stash(name, creationSuccess, function(data) { updateMessage("Sorry, something went wrong. Try again!"); });
 }
 
