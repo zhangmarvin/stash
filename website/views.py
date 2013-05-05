@@ -11,12 +11,9 @@ from django.views.decorators.csrf import csrf_exempt
 
 from website.models import *
 
-@csrf_exempt
-def home(request):
-    c = {}
-    c.update(csrf(request))
-    return render_to_response('index.html', c)
+### AJAX ###
 
+@csrf_exempt
 def login(request):
     name = request.POST['username']
     matches = User.objects.filter(username=name)
@@ -35,6 +32,7 @@ def login(request):
     else:
         return HttpResponse(str({'success': 'false', 'reason': 'bad password'}))
     
+@csrf_exempt
 def register(request):
     _name = request.POST['username']
     matches = User.objects.filter(username=_name)
@@ -58,6 +56,20 @@ def register(request):
     u.save()
     
     return HttpResponse(str({'success': 'true'}))
+
+def make_stash(request):
+    ;
+
+def make_heap(request)
+
+### END AJAX ###
+
+
+@csrf_exempt
+def home(request):
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('index.html', c)
 
 def user_home(request, user_id):
     try:
