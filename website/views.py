@@ -2,7 +2,7 @@
 from hashlib import sha512
 from random import randrange
 
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, HttpRequest, Http404
 from django.core.exceptions import PermissionDenied
 from django.template import RequestContext
 from django.shortcuts import render, render_to_response
@@ -84,9 +84,9 @@ def register(request):
     return HttpResponse(json.dumps({"success": 1}))
 
 def make_stash(request):
-    print request.sessions
-    _owner = request.GET["owner"]
-    if _owner != request.sessions["id"]:
+    try:
+        _owner = request.session["id"]
+    except AttributeError:
         return HttpResponse(json.dumps({"success": 0, "reason": "not logged in"}))
     _name = request.GET["name"]
     user = User.objects.get(pk=_owner)
