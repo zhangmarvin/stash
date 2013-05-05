@@ -52,10 +52,11 @@ def register(request):
     hasher.update(pw)
     hasher.update(_salt)
     digest = hasher.digest()
-    for i in range(len(digest)):
-        digest[i] = chr(ord(digest[i]) % 128)
+    digested = ""
+    for char in digest:
+        digested += chr(ord(char) % 128)
 
-    u = User(name=_name, salt=_salt, password=unicode(digest))
+    u = User(name=_name, salt=_salt, password=unicode(digested))
     u.save()
     
     return HttpResponse(str({'success': 'true'}))
