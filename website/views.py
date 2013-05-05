@@ -176,7 +176,9 @@ def user_home(request, user_id=None):
            }
     return render_to_response('user_home.html', RequestContext(request, data))
 
-def stash(request, user_id, stash_id):
+def stash(request, stash_id, user_id=None):
+    if user_id is None:
+        user_id = request.session['id']
     try:
         user = User.objects.get(pk=user_id)
         stash = Stash.objects.get(pk=stash_id)
@@ -191,7 +193,9 @@ def stash(request, user_id, stash_id):
            }
     return render_to_response('stash.html', RequestContext(request, data))
 
-def heap(request, user_id, heap_id):
+def heap(request, heap_id, user_id=None):
+    if user_id is None:
+        user_id = request.session['id']
     try:
         user = User.objects.get(pk=user_id)
         all_users = User.objects.get(pk=0)
