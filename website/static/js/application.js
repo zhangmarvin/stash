@@ -1,3 +1,5 @@
+var URL = "http://localhost:8000";
+
 /* Helpers */
 function _make_error_wrapper(error_cb) {
     function error_wrap(jqxhr, status, error) {
@@ -33,7 +35,7 @@ function dummy() {}
    { 'success': true },
    { 'success': false, 'reason': 'bad password' },
    { 'success': false, 'reason': 'no account' }.
-   */
+*/
 function login(username, password, success_cb, error_cb) {
     $.ajax( {
         url: 'ajax/login',
@@ -53,14 +55,14 @@ function login(username, password, success_cb, error_cb) {
    { 'success': false, 'reason': 'already registered' },
    { 'success': false, 'reason': 'password required' },
    { 'success': false, 'reason': <other reason>}.
-   */
+*/
 function register(username, password, success_cb, error_cb) {
     $.ajax( {
         url: 'ajax/register',
-    type: 'POST',
-    data: {'username': username, 'password': password},
-    success: _make_success_wrapper(success_cb),
-    failure: _make_error_wrapper(error_cb),
+        type: 'POST',
+        data: {'username': username, 'password': password},
+        success: _make_success_wrapper(success_cb),
+        failure: _make_error_wrapper(error_cb),
     });
 }
 
@@ -71,15 +73,28 @@ function register(username, password, success_cb, error_cb) {
    Otherwise, it calls success_cb with one of the following:
    { 'success': true },
    { 'success': false, 'reason': 'not logged in' }
-   */
-function logout(username, success_cb, error_cb) {
+*/
+function logout(success_cb, error_cb) {
     $.ajax( {
         url: 'ajax/logout',
-    type: 'GET',
-    data: {'username': username}, 
-    success: _make_success_wrapper(success_cb),
-    failure: _make_error_wrapper(error_cb)
+        type: 'GET',
+        // data: {'username': username}, 
+        success: _make_success_wrapper(success_cb),
+        failure: _make_error_wrapper(error_cb)
     });
+}
+
+function submitLogout() {
+    logout(function(data) {
+        console.log( URL );
+        window.location.href = URL; },
+           function(data) {
+               if (data.type == 'http') {
+                   console.log("HTTP Error: " + data.reason);
+               } else {
+                   console.log("Error: " + data.type );
+               }
+               window.location.href = URL; });
 }
 
 /* If there's an error, it calls error_cb with one of
@@ -90,14 +105,14 @@ function logout(username, success_cb, error_cb) {
    { 'success': true },
    { 'success': false, 'reason': 'not logged in' }
    { 'success': false, 'reason': 'this name has been taken' }
-   */
+*/
 function create_stash(stash_name, success_cb, error_cb) {
     $.ajax( {
         url: 'ajax/make_stash',
-    type: 'GET',
-    data: {'owner': owner, 'name': stash_name}, 
-    success: _make_success_wrapper(success_cb),
-    failure: _make_error_wrapper(error_cb)
+        type: 'GET',
+        data: {'owner': owner, 'name': stash_name}, 
+        success: _make_success_wrapper(success_cb),
+        failure: _make_error_wrapper(error_cb)
     });
 }    
 
@@ -108,14 +123,14 @@ function create_stash(stash_name, success_cb, error_cb) {
    Otherwise, it calls success_cb with one of the following:
    { 'success': true },
    { 'success': false, 'reason': 'not logged in' }
-   */
+*/
 function create_heap(stash_name, visible, success_cb, error_cb) {
     $.ajax( {
         url: 'ajax/make_heap',
-    type: 'GET',
-    data: {'owner': owner, 'name': stash_name}, 
-    success: _make_success_wrapper(success_cb),
-    failure: _make_error_wrapper(error_cb)
+        type: 'GET',
+        data: {'owner': owner, 'name': stash_name}, 
+        success: _make_success_wrapper(success_cb),
+        failure: _make_error_wrapper(error_cb)
     });
 }    
 
@@ -130,14 +145,14 @@ function create_heap(stash_name, visible, success_cb, error_cb) {
    { 'success': false, 'reason': 'not logged in' },
    { 'success': false, 'reason': 'no write access' }
    { 'success': false, 'reason': 'stash does not exist' }
-   */
+*/
 function stash_link(stash_id, title, link_url, success_cb, error_cb) {
     $.ajax( {
         url: 'ajax/stash_link',
-    type: 'GET',
-    data: {'stash': stash_id, 'title': title, 'url': link_url},
-    success: _make_success_wrapper(success_cb),
-    error: _make_error_wrapper(error_cb)
+        type: 'GET',
+        data: {'stash': stash_id, 'title': title, 'url': link_url},
+        success: _make_success_wrapper(success_cb),
+        error: _make_error_wrapper(error_cb)
     });
 }
 
@@ -152,14 +167,14 @@ function stash_link(stash_id, title, link_url, success_cb, error_cb) {
    { 'success': false, 'reason': 'not logged in' },
    { 'success': false, 'reason': 'no write access' }
    { 'success': false, 'reason': 'heap does not exist' }
-   */
+*/
 function throw_link(heap_id, title, link_url, success_cb, error_cb) {
     $.ajax( {
         url: 'ajax/throw_link',
-    type: 'GET',
-    data: {'heap': heap_id, 'title': title, 'url': link_url},
-    success: _make_success_wrapper(success_cb),
-    error: _make_error_wrapper(error_cb)
+        type: 'GET',
+        data: {'heap': heap_id, 'title': title, 'url': link_url},
+        success: _make_success_wrapper(success_cb),
+        error: _make_error_wrapper(error_cb)
     });
 }
 
@@ -176,14 +191,14 @@ function throw_link(heap_id, title, link_url, success_cb, error_cb) {
    { 'success': false, 'reason': 'no read access to heap'}
    { 'success': false, 'reason': 'heap does not exist' }
    { 'success': false, 'reason': 'stash does not exist' }
-   */
+*/
 function stash_take_toggle(stash_id, heap_id, link_url, success_cb, error_cb) {
     $.ajax( {
         url: 'ajax/toggle_take',
-    type: 'GET',
-    data: {'stash': stash_id, 'heap': heap_id, 'url': link_url},
-    success: _make_success_wrapper(success_cb),
-    error: _make_error_wrapper(error_cb)
+        type: 'GET',
+        data: {'stash': stash_id, 'heap': heap_id, 'url': link_url},
+        success: _make_success_wrapper(success_cb),
+        error: _make_error_wrapper(error_cb)
     });
 }
 
