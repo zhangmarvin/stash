@@ -38,7 +38,7 @@ function login(username, password, success_cb, error_cb) {
     $.ajax( {
 	url: 'ajax/login',
 	type: 'POST',
-	data: {'name': username, 'password': password},
+	data: {'username': username, 'password': password},
 	success: _make_success_wrapper(success_cb),
 	failure: _make_error_wrapper(error_cb)
     });
@@ -58,7 +58,7 @@ function register(username, password, success_cb, error_cb) {
     $.ajax( {
 	url: 'ajax/register',
 	type: 'POST',
-	data: {'name': username, 'password': password},
+	data: {'username': username, 'password': password},
 	success: _make_success_wrapper(success_cb),
 	failure: _make_error_wrapper(error_cb)
     });
@@ -76,7 +76,7 @@ function logout(username, success_cb, error_cb) {
     $.ajax( {
 	url: 'ajax/logout',
 	type: 'GET',
-	data: {'name': username}, 
+	data: {'username': username}, 
 	success: _make_success_wrapper(success_cb),
 	failure: _make_error_wrapper(error_cb)
     });

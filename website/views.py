@@ -1,11 +1,57 @@
 # Create your views here.
+from hashlib import sha512
+from random import randrange
+
 from django.http import HttpResponse, Http404
 from django.core.exceptions import PermissionDenied
 from django.template import RequestContext
 from django.shortcuts import render, render_to_response
 
+from stash.models import *
+
 def home(request):
     return render_to_response('index.html', request)
+
+def login(request):
+    name = request.POST['username']
+    matches = User.objects.filter(username=name)
+    if len(matches) != 1:
+        return HttpResponse(str({'success': 'false', 'reason': 'no account'}))
+    
+    pw = request.POST['password']
+    salt = matches[0].salt
+    hashed = matches[0].password
+    checker = sha512()
+    checker.update(pw)
+    checker.update(salt)
+    
+    if checker.digest() == hashed:
+        return HttpResponse(str({'success': 'true'}))
+    else:
+        return HttpResponse(str({'success': 'false', 'reason': 'bad password'}))
+
+def register(request):
+    _name = request.POST['username']
+    matches = User.objects.filter(username=_name)
+    if len(matches) > 0:
+        return HttpResponse(str({'success': 'false', 'reason': 'already registered'}))
+    
+    pw = request.POST['password']
+    if len(pw) == 0:
+        return HttpResponse(str({'success': 'false', 'reason': 'password required'}))
+
+    raw = randrange(2 ** 512)
+    salt = ''
+    for i in range(512/8):
+        salt += chr((raw >> (8*i)) & 0xFF)
+        
+    hasher = sha512()
+    hasher.update(pw)
+    hasher.update(salt)
+
+    u = User(name=_name, salt=_salt, password=hasher.digest())
+    
+    return HttpResponse(str({'success': 'true'}))
 
 def user_home(request, user_id):
     try:
