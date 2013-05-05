@@ -9,8 +9,8 @@ class Content(models.Model):
 
 class User(models.Model):
     name = models.CharField(max_length=30)
-    salt = models.CharField(max_length=5)
-    password = models.CharField(max_length=50)
+    salt = models.CharField(max_length=8)
+    password = models.CharField(max_length=64) # output of hashlib.sha512()
     
 class Heap(models.Model):
     name = models.CharField(max_length=30)
