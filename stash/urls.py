@@ -12,7 +12,7 @@ urlpatterns = patterns('',
                        
     url(r'^ajax/login', 'website.views.login'),
     url(r'^ajax/register', 'website.views.register'),
-    # url(r'^ajax/logout', 'website.views.logout'),
+    url(r'^ajax/logout', 'website.views.logout'),
     url(r'^ajax/make_stash', 'website.views.make_stash'),
     url(r'^ajax/make_heap', 'website.views.make_heap'),
     # url(r'^ajax/stash_link', 'website.views.stash_link'),

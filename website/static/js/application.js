@@ -78,7 +78,6 @@ function logout(success_cb, error_cb) {
     $.ajax( {
         url: 'ajax/logout',
         type: 'GET',
-        // data: {'username': username}, 
         success: _make_success_wrapper(success_cb),
         failure: _make_error_wrapper(error_cb)
     });
