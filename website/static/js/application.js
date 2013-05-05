@@ -187,3 +187,8 @@ function stash_take_toggle(stash_id, heap_id, link_url, success_cb, error_cb) {
     });
 }
 
+// stash.js to allow for previewing in iframe
+function preview(url) {
+    window.frames['previewing'].document.location.href = url;
+    // document.getElementById("previewing")
+}
