@@ -1,23 +1,23 @@
 {% extends "user_base.html" %}
-{% block title %}{{owner}}: {{ name }}{% endblock %}
+{% block title %} {{ name }}{% endblock %}
+{% block user %}{{ name }}{% endblock %}
 
 {% block content %}
-<div>
-    {{ name }}    
-    <button class="btn" id="create-post" type="submit" onClick="javascript:createPost()">Create a New Post</button>
-</div>
 
-<div class="span6 links">
-  {% for entry in content %}
-  <div class="link" onClick="preview({{ entry.link }})">
+<div class="row-fluid">
+  <div class="span6 links">
+    <span class="pull-right"><button class="btn btn-inverse" id="create-post" type="submit" onClick="javascript:$('#createPostForm').modal('show')"><i class="icon-plus icon-white"></i></button></span>
+    {% for entry in content %}
+    <div class="link" onClick="preview({{ entry.link }})">
       <p><span class="lead"><a href="{{ entry.link }}">{{ entry.title }}</a></span><br>
-      {{ entry.link }} <span class="muted">{{ entry.date_posted }}</span></p>
+        {{ entry.link }} <span class="muted">{{ entry.date_posted }}</span></p>
+    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
 
-<div class="span6 preview">
-  <iframe id="previewing"></iframe>
+  <div class="span6 preview">
+    <iframe id="previewing" style="width:100%;height:100%"></iframe>
+  </div>
 </div>
 
 <div id="createPostForm" class="modal hide fade">
@@ -29,7 +29,7 @@
     <form class="form-inline" method="post" action="javascript:dummy()">
       <input type="text" class="input-small" autocomplete="off" name="postName" placeholder="untitled post" autofocus  id="postName"><br>
       <input type="text" class="input-small" autocomplete="off" name="postURL" placeholder="url" id="postURL"><br>
-      <button class="btn" id="createPost" type="submit" onClick="javascript:createPost()"><i class="icon-plus icon-white"></i></button>
+      <span class="pull-right"><button class="btn btn-inverse" id="createNewPost" type="submit" onClick="javascript:createPost(); $('#createPostForm').modal('hide')"><i class="icon-plus icon-white"></i></button></span>
     </form>
   </div>
   <div class="modal-footer">
