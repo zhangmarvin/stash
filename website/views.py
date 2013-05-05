@@ -45,7 +45,7 @@ def register(request):
     raw = randrange(2 ** 512)
     _salt = ''
     for i in range(512/8):
-        _salt += chr((raw >> (8*i)) & 0xFF)
+        _salt += chr(((raw >> (8*i)) & 0xFF) % 128)
         
     hasher = sha512()
     hasher.update(pw)
