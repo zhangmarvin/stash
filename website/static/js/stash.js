@@ -1,4 +1,4 @@
 function preview(url) {
-    window.frames['testIframe'].document.location.href = url;
+    window.frames['previewing'].document.location.href = url;
     // document.getElementById("previewing")
 }
