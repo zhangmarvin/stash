@@ -145,7 +145,7 @@ def stash_link(request):
     if _type == "stash":
         writeable = (target.owner == _owner_obj)
     else:
-        writeable = (_owner_obj in target.curators) # use id?
+        writeable = (_owner_obj in target.curators.all()) # use id?
     if not writeable:
         return HttpResponse(json.dumps({"success": 0, "reason": "no write access"}))
         

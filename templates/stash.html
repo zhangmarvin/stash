@@ -4,19 +4,20 @@
 
 {% block content %}
 
-<div class="row-fluid">
+<div class="row-fluid" style="margin-top:1em; height:100%">
   <div class="span6 links">
     <span class="pull-right"><button class="btn btn-inverse" id="create-post" type="submit" onClick="javascript:$('#createPostForm').modal('show')"><i class="icon-plus icon-white"></i></button></span>
     {% for entry in content %}
-    <div class="link" onClick="preview({{ entry.link }})">
-      <p><span class="lead"><a href="{{ entry.link }}">{{ entry.title }}</a></span><br>
-        {{ entry.link }} <span class="muted">{{ entry.date_posted }}</span></p>
+    <div class="link" onClick="preview('{{ entry.link }}')">
+      <p><span class="lead"><a href="{{ entry.link }}">{{ entry.title }}</a></span>
+        <span class="muted" title={{ entry.link }}>({{ entry.link }})</span><br>
+        <span class="muted"><small>{{ entry.date_posted }}</small></span></p>
     </div>
     {% endfor %}
   </div>
 
   <div class="span6 preview">
-    <iframe id="previewing" style="width:100%;height:100%"></iframe>
+    <iframe id="previewing"></iframe>
   </div>
 </div>
 

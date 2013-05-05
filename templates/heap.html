@@ -1,24 +1,31 @@
 {% extends "user_base.html" %}
 {% block title %}{{ name }}{% endblock %}
+{% block user %}{{ name }}{% endblock %}
 
 {% block content %}
-<div style="overflow: hidden; text-overflow: ellipsis;">
-    {{ name }}<br>
+
+<div class="row-fluid" style="margin-top:1em; overflow: hidden; text-overflow: ellipsis;">
+  <div class="span12 well">
     <p>Curated by: {% for user in curators %} {{ user.name }} {% endfor %}</p>
     <p>Readers: {% for user in readers %} {{ user.name }} {% endfor %}</p>
-</div>
-
-<div class="span6 links">
-  {% for entry in content %}
-  <div class="link" onClick="preview({{ entry.link }})">
-      <p><span class="lead"><a href="{{ entry.link }}">{{ entry.title }}</a></span><br>
-      {{ entry.link }} <span class="muted">{{ entry.date_posted }}</span></p>
   </div>
-  {% endfor %}
 </div>
 
-<div class="span6 preview">
-  <iframe id="previewing"></iframe>
+<div class="row-fluid" style="height:100%">
+  <div class="span6 links">
+    <span class="pull-right"><button class="btn btn-inverse" id="create-post" type="submit" onClick="javascript:$('#createPostForm').modal('show')"><i class="icon-plus icon-white"></i></button></span>
+    {% for entry in content %}
+    <div class="link" onClick="preview('{{ entry.link }}')">
+      <p><span class="lead"><a href="{{ entry.link }}">{{ entry.title }}</a></span>
+        <span class="muted" title={{ entry.link }}>({{ entry.link }})</span><br>
+        <span class="muted"><small>{{ entry.date_posted }}</small></span></p>
+    </div>
+    {% endfor %}
+  </div>  
+
+  <div class="span6 preview">
+    <iframe id="previewing"></iframe>
+  </div>
 </div>
 
 <div id="createPostForm" class="modal hide fade">
@@ -30,7 +37,7 @@
     <form class="form-inline" method="post" action="javascript:dummy()">
       <input type="text" class="input-small" autocomplete="off" name="postName" placeholder="untitled post" autofocus  id="postName"><br>
       <input type="text" class="input-small" autocomplete="off" name="postURL" placeholder="url" id="postURL"><br>
-      <button class="btn" id="createPost" type="submit" onClick="javascript:createPost()"><i class="icon-plus icon-white"></i></button>
+      <span class="pull-right"><button class="btn btn-inverse" id="createNewPost" type="submit" onClick="javascript:createPost(); $('#createPostForm').modal('hide')"><i class="icon-plus icon-white"></i></button></span>
     </form>
   </div>
   <div class="modal-footer">
