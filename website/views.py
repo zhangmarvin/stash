@@ -83,6 +83,13 @@ def register(request):
     
     return HttpResponse(json.dumps({"success": 1}))
 
+def logout(request):
+    try:
+        del request.session["id"]
+        return HttpResponse(json.dumps({"success": 1}))
+    except KeyError:
+        return HttpResponse(json.dumps({"success": 0, "reason": "not logged in"}))
+
 def make_stash(request):
     try:
         _owner = request.session["id"]
