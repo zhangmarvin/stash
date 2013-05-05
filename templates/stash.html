@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ name }}{% endblock %}
+
+{% block content %}
+<div class="span12">
+  {{ name }}
+</div>
+
+<div class="span6 links">
+  { % for link in content % }
+  <div class="link" onClick="preview({{ link.link }})">
+    <p><span class="lead"><a href="{{ link.link }}">{{ link.title }}</a></span>
+      <span class="muted">{{ link.date_posted }}</span></p>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="span6 preview">
+  <iframe id="previewing"></iframe>
+</div>
+{% endblock %}
