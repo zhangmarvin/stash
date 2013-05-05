@@ -186,7 +186,7 @@ def stash(request, stash_id, user_id=None):
         stash = Stash.objects.get(pk=stash_id)
     except User.DoesNotExist, Stash.DoesNotExist:
         raise Http404
-    if stash.owner is not user:
+    if stash.owner != user:
         raise PermissionDenied
     data = {'id': stash_id,
             'name': stash.name,
