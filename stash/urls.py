@@ -6,6 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'website.views.home', name='home'),
+    url(r'^ajax/login', 'website.views.login'),
     url(r'^ajax/(?P<data>.*)', 'website.views.ajax'),
     url(r'^admin/', include(admin.site.urls))
 )
