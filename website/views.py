@@ -14,8 +14,8 @@ from website.models import *
 
 @csrf_exempt
 def login(request):
-    name = request.POST['username']
-    matches = User.objects.filter(username=name)
+    _name = request.POST['username']
+    matches = User.objects.filter(name=_name)
     if len(matches) != 1:
         return HttpResponse(str({'success': 'false', 'reason': 'no account'}))
     
@@ -34,7 +34,7 @@ def login(request):
 @csrf_exempt
 def register(request):
     _name = request.POST['username']
-    matches = User.objects.filter(username=_name)
+    matches = User.objects.filter(name=_name)
     if len(matches) > 0:
         return HttpResponse(str({'success': 'false', 'reason': 'already registered'}))
     
