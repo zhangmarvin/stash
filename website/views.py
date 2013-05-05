@@ -36,9 +36,9 @@ def login(request):
     if digested == hashed:
         request.session['id'] = matches[0].id
         request.session['username'] = _name
-        request.session['heaps_write'] = matches[0].curators.all() 
-        request.session['heaps_read'] = matches[0].readers.all()
-        request.session['stashes'] = matches[0].stashes.all()
+        #         request.session['heaps_write'] = matches[0].curators.all() 
+        #         request.session['heaps_read'] = matches[0].readers.all()
+        #         request.session['stashes'] = matches[0].stashes.all()
         return HttpResponse(json.dumps({"success": 1}))
     else:
         return HttpResponse(json.dumps({"success": 0, "reason": "bad password"}))
@@ -77,14 +77,26 @@ def register(request):
 
     request.session['id'] = u.id
     request.session['username'] = _name
-    request.session['heaps_write'] = []
-    request.session['heaps_read'] = []
-    request.session['stashes'] = []
+    #     request.session['heaps_write'] = []
+    #     request.session['heaps_read'] = []
+    #     request.session['stashes'] = []
     
     return HttpResponse(json.dumps({"success": 1}))
 
 def make_stash(request):
-    pass
+    print request.sessions
+    _owner = request.GET["owner"]
+    if _owner != request.sessions["id"]:
+        return HttpResponse(json.dumps({"success": 0, "reason": "not logged in"}))
+    _name = request.GET["name"]
+    user = User.objects.get(pk=_owner)
+    for stash in user.stashes.all():
+        if _name == stash.name:
+            return HttpResponse(json.dumps({"success": 0, "reason": "this name has been taken"}))
+    new_stash = Stash(name = _name, content = [], owner = user, takes_from = [])
+    new_stash.save()
+
+    return HttpResponse(json.dumps({"success": 1}))
 
 def make_heap(request):
     pass
