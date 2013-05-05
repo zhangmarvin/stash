@@ -104,7 +104,7 @@ def make_stash(request):
     new_stash.save()
 
     return HttpResponse(json.dumps({"success": 1, "id": new_stash.id,
-                                    "name": new_stash.name}))
+                                    "name": new_stash.name, "type": "stash"}))
 
 def make_heap(request):
     try:
@@ -120,7 +120,7 @@ def make_heap(request):
     new_heap.save()
 
     return HttpResponse(json.dumps({"success": 1, "id": new_heap.id
-                                    "name": new_heap.name}))
+                                    "name": new_heap.name, "type": "heap"}))
 
 def stash_link(request):
     try:

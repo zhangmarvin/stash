@@ -101,7 +101,7 @@ function submitLogout() {
    { 'type': 'http', 'reason': <server return message> }
 
    Otherwise, it calls success_cb with one of the following:
-   { 'success': true, 'id': <id> },
+   { 'success': true, 'id': <id>, 'name': <name>, 'type': 'stash' },
    { 'success': false, 'reason': 'not logged in' }
    { 'success': false, 'reason': 'this name has been taken' }
    */
@@ -120,7 +120,7 @@ function create_stash(stash_name, success_cb, error_cb) {
    { 'type': 'http', 'reason': <server return message> }
 
    Otherwise, it calls success_cb with one of the following:
-   { 'success': true, 'id': <id> },
+   { 'success': true, 'id': <id>, 'name': <name>, 'type': 'heap' },
    { 'success': false, 'reason': 'not logged in' }
    */
 function create_heap(stash_name, visible, success_cb, error_cb) {
