@@ -19,12 +19,12 @@ function loginSuccess(data) {
     } else {
         console.log("Error: " + data.reason);
         switch (data.reason) {
-            case "bad password":
-                updateMessage("You entered the wrong password. Please try again!");
-                return;
-            case "no account":
-                updateMessage("You entered an invalid username. Did you mean to sign up?");
-                return;
+        case "bad password":
+            updateMessage("You entered the wrong password. Please try again!");
+            break;
+        case "no account":
+            updateMessage("You entered an invalid username. Did you mean to sign up?");
+            break;
         }
     }
 }
@@ -43,14 +43,14 @@ function signupSuccess(data) {
     } else {
         console.log("Error: " + data.reason);
         switch (data.reason) {
-            case "already registered":
-                updateMessage("This username has already been taken.");
-                return;
-            case "password required":
-                updateMessage("You need a password to log in.");
-                return;
-            default:
-                updateMessage("Error: " + data.reason);
+        case "already registered":
+            updateMessage("This username has already been taken.");
+            break;
+        case "password required":
+            updateMessage("You need a password to sign up.");
+            break;
+        default:
+            updateMessage("Error: " + data.reason);
         }
     }
 }
