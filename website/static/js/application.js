@@ -1,4 +1,3 @@
-
 /* Helpers */
 function _make_error_wrapper(error_cb) {
     function error_wrap(jqxhr, status, error) {
@@ -60,7 +59,7 @@ function register(username, password, success_cb, error_cb) {
 	type: 'POST',
 	data: {'username': username, 'password': password},
 	success: _make_success_wrapper(success_cb),
-	failure: _make_error_wrapper(error_cb)
+	failure: _make_error_wrapper(error_cb),
     });
 }
 

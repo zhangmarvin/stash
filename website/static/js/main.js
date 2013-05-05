@@ -32,6 +32,5 @@ function signupSuccess(data) {
 function submitSignup() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-    console.log("hi");
     register(username, password, signupSuccess, function(data) { console.log( "Sorry, something went wrong. Try again!"); });
 }
