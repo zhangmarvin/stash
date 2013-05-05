@@ -6,7 +6,6 @@ from django.http import HttpResponse, Http404
 from django.core.exceptions import PermissionDenied
 from django.template import RequestContext
 from django.shortcuts import render, render_to_response
-from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt
 
 from website.models import *
@@ -58,9 +57,10 @@ def register(request):
     return HttpResponse(str({'success': 'true'}))
 
 def make_stash(request):
-    ;
+    pass
 
-def make_heap(request)
+def make_heap(request):
+    pass
 
 ### END AJAX ###
 
