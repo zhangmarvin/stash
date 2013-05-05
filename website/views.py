@@ -50,6 +50,7 @@ def register(request):
     hasher.update(salt)
 
     u = User(name=_name, salt=_salt, password=hasher.digest())
+    u.save()
     
     return HttpResponse(str({'success': 'true'}))
 
