@@ -33,6 +33,11 @@ def login(request):
         digested += chr(ord(char) % 128)
     
     if str(digested) == hashed:
+        request.session['id'] = matches[0].id
+        request.session['username'] = _name
+        request.session['heaps_write'] = matches[0].curators.all() 
+        request.session['heaps_read'] = matches[0].readers.all()
+        request.session['stashes'] = matches[0].stashes.all()
         return HttpResponse(json.dumps({"success": 1}))
     else:
         return HttpResponse(json.dumps({"success": 0, "reason": "bad password"}))
@@ -68,6 +73,12 @@ def register(request):
     u = User(name=_name, salt=_salt, password=unicode(digested))
     u.save()
     
+    request.session['id'] = u.id
+    request.session['username'] = _name
+    request.session['heaps_write'] = []
+    request.session['heaps_read'] = []
+    request.session['stashes'] = []
+    
     return HttpResponse(json.dumps({"success": 1}))
 
 def make_stash(request):
@@ -83,13 +94,15 @@ def make_heap(request):
 def home(request):
     return render_to_response('index.html', request)
 
-def user_home(request, user_id):
+def user_home(request, user_id=None):
+    if user_id is None:
+        user_id = request.session['id']     
     try:
         user = User.objects.get(pk=user_id)
     except User.DoesNotExist:
         raise Http404
     data = {'id': user_id,
-            'stashes': user.stash_set.all(),
+            'stashes': user.stashes.all(),
             'heaps_write': user.curators.all(),
             'heaps_read': user.readers.all(),
             'range': range(3)

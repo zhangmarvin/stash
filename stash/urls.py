@@ -6,8 +6,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'website.views.home', name='home'),
-    url(r'^user/<user_id>', 'website.views.user_home'),
+    url(r'^user/', 'website.views.user_home'),
     url(r'^stash/<stash_id>', 'website.views.stash'),
+    url(r'^heap/<heap_id>', 'website.views.heap'),
                        
     url(r'^ajax/login', 'website.views.login'),
     url(r'^ajax/register', 'website.views.register'),

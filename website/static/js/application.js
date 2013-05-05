@@ -82,6 +82,43 @@ function logout(username, success_cb, error_cb) {
     });
 }
 
+/* If there's an error, it calls error_cb with one of
+   { 'type': <non-HTTP error> }
+   { 'type': 'http', 'reason': <server return message> }
+
+   Otherwise, it calls success_cb with one of the following:
+   { 'success': true },
+   { 'success': false, 'reason': 'not logged in' }
+   { 'success': false, 'reason': 'this name has been taken' }
+*/
+function create_stash(stash_name, success_cb, error_cb) {
+    $.ajax( {
+	url: 'ajax/make_stash',
+	type: 'GET',
+	data: {'owner': owner, 'name': stash_name}, 
+	success: _make_success_wrapper(success_cb),
+	failure: _make_error_wrapper(error_cb)
+    });
+}    
+
+/* If there's an error, it calls error_cb with one of
+   { 'type': <non-HTTP error> }
+   { 'type': 'http', 'reason': <server return message> }
+
+   Otherwise, it calls success_cb with one of the following:
+   { 'success': true },
+   { 'success': false, 'reason': 'not logged in' }
+*/
+function create_heap(stash_name, visible, success_cb, error_cb) {
+    $.ajax( {
+	url: 'ajax/make_heap',
+	type: 'GET',
+	data: {'owner': owner, 'name': stash_name}, 
+	success: _make_success_wrapper(success_cb),
+	failure: _make_error_wrapper(error_cb)
+    });
+}    
+
 /* For "stashing" a link away... 
    
    If there's an error submitting a link, it calls error_cb with one of
@@ -194,4 +231,9 @@ function creationSuccess(data) {
                 updateMessage("Error: " + data.reason);
         }
     }
+
+// stash.js to allow for previewing in iframe
+function preview(url) {
+    window.frames['previewing'].document.location.href = url;
+    // document.getElementById("previewing")
 }

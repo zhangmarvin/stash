@@ -49,7 +49,44 @@
     {% endfor %}
 </div>
 
+<div id="createStashForm" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h2 id="createStashHeader" class="inlineCenter">Create a Stash</h2>
+  </div>
+  <div id="createStashBody" class="modal-body">
+    <form class="form-inline" method="post" action="javascript:dummy()">
+      <input type="text" class="input-small" autocomplete="off" name="stashName" placeholder="untitled stash" autofocus  id="stashName"><br>
+      <button class="btn" id="createStash" type="submit" onClick="javascript:createStash()"><i class="icon-plus icon-white"></i></button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+  </div>
+</div>
+
+<div id="createHeapForm" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h2 id="createHeapHeader" class="inlineCenter">Create a Heap</h2>
+  </div>
+  <div id="createHeapBody" class="modal-body">
+    <form class="form-inline" method="post" action="javascript:dummy()">
+      <input type="text" class="input-small" autocomplete="off" name="heapName" placeholder="untitled heap" autofocus  id="heapName"><br>
+      <input type="checkbox" name="heapVisibility" value="true" id="heapVisibility"><br>
+      <label for="heapVisibility">Allow this heap to be searchable?</label>
+      <button class="btn" id="createHeap" type="submit" onClick="javascript:createHeap()"><i class="icon-plus icon-white"></i></button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+  </div>
+</div>
 {% endblock %}
 
 {% block endbody %}
+<script>
+  $('#createHeapForm').modal('hide');
+  $('#createStashForm').modal('hide');
+</script>
 {% endblock %}
