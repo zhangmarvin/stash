@@ -1,0 +1,11 @@
+[
+  {
+    "model": "website.User",
+    "pk": 0,
+    "fields": {
+      "name": "all_users",
+      "salt": "",
+      "password": ""
+    }
+  }
+]

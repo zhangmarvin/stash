@@ -9,6 +9,7 @@ from django.shortcuts import render, render_to_response
 from django.views.decorators.csrf import csrf_exempt
 
 from website.models import *
+import website
 import simplejson as json
 
 ### AJAX ###
@@ -185,8 +186,11 @@ def stash(request, stash_id, user_id=None):
         user_id = request.session['id']
     try:
         user = User.objects.get(pk=user_id)
+    except User.DoesNotExist:
+        raise Http404
+    try:
         stash = Stash.objects.get(pk=stash_id)
-    except User.DoesNotExist, Stash.DoesNotExist:
+    except Stash.DoesNotExist:
         raise Http404
     if stash.owner != user:
         raise PermissionDenied
@@ -203,8 +207,11 @@ def heap(request, heap_id, user_id=None):
     try:
         user = User.objects.get(pk=user_id)
         all_users = User.objects.get(pk=0)
-        heap = Heap.objects.get(pk=user_id)
-    except User.DoesNotExist, Heap.DoesNotExist:
+    except User.DoesNotExist:
+        raise Http404
+    try:
+        heap = Heap.objects.get(pk=heap_id)
+    except Heap.DoesNotExist:
         raise Http404
     curators_list = heap.curators.all()
     if user not in curators_list and all_users not in curators_list:
