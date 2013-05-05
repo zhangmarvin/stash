@@ -8,10 +8,11 @@
 {% block content %}
 <div id="introbox">
   <h1>Stash</h1><br>
-  <form class="form-inline" method="post" action="#">
+  <form class="form-inline" method="post">
     <input type="text" class="input-medium" autocomplete="off" name="username" placeholder="username" autofocus  id="username"><br>
     <input type="text" class="input-medium" autocomplete="off" name="password" placeholder="password"  id="password"><br>
-    <button class="btn btn-info" id="search_button" type="submit"><i class="icon-circle-arrow-right icon-white"></i></button>
+    <button class="btn btn-info" id="login" type="submit" onClick="javascript:submitLogin()"><i class="icon-circle-arrow-left icon-white"></i> Log In</button>
+    <button class="btn btn-info" id="signup" type="submit" onClick="javascript:submitSignup()"><i class="icon-circle-arrow-right icon-white"></i> Sign Up</button>
   </form>
 
 </div>
