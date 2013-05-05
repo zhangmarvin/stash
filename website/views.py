@@ -15,7 +15,8 @@ def user_home(request, user_id):
     data = {'id': user_id,
             'stashes': user.stash_set.all(),
             'heaps_write': user.curators.all(),
-            'heaps_read': user.readers.all()
+            'heaps_read': user.readers.all(),
+            'range': range(3)
            }
     return render_to_response('user_home.html', RequestContext(request, data))
 
@@ -30,7 +31,7 @@ def stash(request, user_id, stash_id):
     data = {'id': stash_id,
             'name': stash.name,
             'owner': user_id,
-            'content': stash.content
+            'content': stash.content.all()
            }
     return render_to_response('stash.html', RequestContext(request, data))
 
@@ -51,7 +52,7 @@ def heap(request, user_id, heap_id):
             'name': heap.name,
             'curators': curators_list,
             'readers': readers_list,
-            'content': heap.content
+            'content': heap.content.all()
            }
     return render_to_response('heap.html', RequestContext(request, data))
 
