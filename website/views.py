@@ -31,8 +31,9 @@ def login(request):
     digested = ""
     for char in digest:
         digested += chr(ord(char) % 128)
+
     
-    if str(digested) == hashed:
+    if digested == hashed:
         request.session['id'] = matches[0].id
         request.session['username'] = _name
         request.session['heaps_write'] = matches[0].curators.all() 
@@ -70,9 +71,10 @@ def register(request):
     for char in digest:
         digested += chr(ord(char) % 128)
 
-    u = User(name=_name, salt=_salt, password=unicode(digested))
+    u = User(name=_name, salt =_salt, password=unicode(digested))
+    u.password = u.password
     u.save()
-    
+
     request.session['id'] = u.id
     request.session['username'] = _name
     request.session['heaps_write'] = []
